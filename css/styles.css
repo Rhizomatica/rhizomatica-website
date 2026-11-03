@@ -1,0 +1,426 @@
+/* ==========================================================================
+   rhizomatica — style replica
+   Based on the "glitch" WordPress theme (Foundation grid).
+   ========================================================================== */
+
+:root {
+  --orange: #ED4E0F;        /* accent */
+  --gray-light: #EAEBEB;    /* sidebar background */
+  --border-light: #E1E1E1;  /* light borders */
+  --text: #222;             /* body text */
+  --text-secondary: #4A4A4A;
+  --text-muted: #999;
+  --off-white: #F3F3F3;     /* hero title / light surfaces */
+  --page-bg: #fefefe;
+
+  --font-serif: 'Crimson Text', Georgia, serif;
+  --font-sans: 'Source Sans 3', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+
+  /* Foundation-style breakpoints */
+  --bp-small: 40em;   /* 640px  */
+  --bp-large: 64em;   /* 1024px */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+.svg-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Hero background (fixed, full viewport)
+   ========================================================================== */
+
+.hero-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background-color: #1a1a1a;
+
+  /* Dark gradient placeholder standing in for the original photo.
+     To use a real image, uncomment the line below and remove the gradients. */
+  /* background-image: url('../images/home.jpg'); */
+  background-image:
+    linear-gradient(100deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.75) 100%),
+    radial-gradient(circle at 75% 30%, #4a4a4a 0%, #1a1a1a 65%);
+
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   Desktop sidebar
+   ========================================================================== */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background: var(--gray-light);
+  border-right: 1px solid var(--border-light);
+  padding: 80px 2% 40px;
+}
+
+.logo {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 60px;
+}
+
+.logo__svg {
+  display: block;
+  width: 70px;
+  height: 70px;
+}
+
+.primary-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.primary-nav li {
+  margin: 5px 0;
+  padding-left: 0;
+  border-left: 3px solid transparent;
+  transition: padding-left 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.primary-nav li:hover,
+.primary-nav li.active {
+  padding-left: 10px;
+  border-left-color: var(--orange);
+}
+
+.primary-nav a {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 18px;
+  color: var(--text-secondary);
+  transition: color 0.2s ease-in-out;
+}
+
+.primary-nav li:hover a {
+  font-weight: 700;
+}
+
+.primary-nav li.active a {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* Social links pinned to the bottom of the sidebar */
+.social {
+  margin-top: auto;
+  display: flex;
+  gap: 15px;
+}
+
+.social a {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  transition: color 0.2s ease-in-out;
+}
+
+.social a:hover {
+  color: var(--orange);
+}
+
+/* ==========================================================================
+   Hero content
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  margin-left: 25%;
+  overflow: hidden;
+}
+
+.hero__content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 0 5%;
+}
+
+.hero__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 70px;
+  font-weight: 700;
+  line-height: 80px;
+  letter-spacing: 2px;
+  color: var(--off-white);
+  text-shadow: 1px 1px 10px #000;
+}
+
+.hero__title strong {
+  display: block;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.hero__cta {
+  position: absolute;
+  right: 5%;
+  bottom: 150px;
+  text-align: right;
+}
+
+/* Arrow CTA button (white text + orange line/chevron) */
+.cta-arrow {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 28px;
+  color: #fff;
+  padding-left: 80px;
+}
+
+.cta-arrow strong {
+  font-weight: 700;
+}
+
+.cta-arrow::before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 0;
+  width: 64px;
+  height: 2px;
+  background-color: var(--orange);
+  transition: width 0.2s ease-in-out;
+}
+
+.cta-arrow::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--orange);
+  border-bottom: 2px solid var(--orange);
+  transform: rotate(-45deg);
+  transition: left 0.2s ease-in-out;
+}
+
+.cta-arrow:hover::before {
+  width: 75px;
+}
+
+.cta-arrow:hover::after {
+  left: 62px;
+}
+
+/* ==========================================================================
+   Mobile header + navigation
+   ========================================================================== */
+
+.mobile-header {
+  display: none;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.hamburger {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hamburger span {
+  position: absolute;
+  left: 22px;
+  width: 26px;
+  height: 2px;
+  background-color: var(--orange);
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger span:nth-child(1) { top: 27px; }
+.hamburger span:nth-child(2) { top: 35px; }
+.hamburger span:nth-child(3) { top: 43px; }
+
+.hamburger:hover span {
+  background-color: var(--text-secondary);
+}
+
+.hamburger.open span {
+  background-color: var(--text-secondary);
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 35px;
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 35px;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  background: var(--off-white);
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
+  transform: translateY(-120%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav li {
+  border-top: 1px solid var(--gray-light);
+}
+
+.mobile-nav li:first-child {
+  border-top: 0;
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 16px 20px;
+  font-size: 16px;
+  color: var(--text-secondary);
+  transition: color 0.2s ease-in-out;
+}
+
+.mobile-nav a:hover {
+  color: var(--orange);
+}
+
+.mobile-nav li.active a {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Responsive — switch to mobile layout below the "large" breakpoint
+   ========================================================================== */
+
+@media (max-width: 63.9375em) {
+  .sidebar {
+    display: none;
+  }
+
+  .hero {
+    margin-left: 0;
+  }
+
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    z-index: 20;
+    background: var(--off-white);
+    padding: 0 15px;
+    box-shadow: 0 1px 0 var(--border-light);
+  }
+
+  .logo--mobile {
+    width: 30px;
+    height: 30px;
+    margin: 0 0 0 5px;
+  }
+
+  .logo--mobile .logo__svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .mobile-nav.open {
+    transform: translateY(0);
+  }
+
+  .hero__content {
+    padding: 0 20px;
+  }
+
+  .hero__cta {
+    right: 20px;
+    bottom: 120px;
+  }
+}
+
+/* Small phones: shrink the hero title */
+@media (max-width: 39.9375em) {
+  .hero__title {
+    font-size: 32px;
+    line-height: 38px;
+    margin-left: 20px;
+  }
+
+  .cta-arrow {
+    font-size: 14px;
+  }
+}
