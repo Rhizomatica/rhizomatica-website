@@ -11,6 +11,7 @@ GitHub Pages.
 ```
 rhizomatica/
 ├── index.html          # Homepage: full-viewport hero + call to action
+├── home_img.png        # Homepage hero background image
 ├── about.html          # About: history, mission, approach
 ├── who-we-are.html     # Who We Are: team, HERMES team, board, supporters
 ├── what-we-do.html     # What We Do: four strategies + projects
@@ -105,9 +106,9 @@ To use it:
 
 ## Customizing
 
-- **Hero image** — the hero currently uses a dark gradient placeholder. To use a
-  real photo, add an image (e.g. `images/home.jpg`) and uncomment the
-  `background-image` line in `css/styles.css`.
+- **Hero image** — the homepage background uses `home_img.png` (with a dark
+  overlay applied in `css/styles.css`). To swap it, replace that file or update
+  the `url()` in the `.hero-bg` rule.
 - **Colors / fonts** — all values are CSS custom properties at the top of
   `css/styles.css`, so you can re-theme the whole site in one place.
 - **Navigation** — the menu items in `index.html` currently link to `#`. Point

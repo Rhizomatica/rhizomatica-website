@@ -65,12 +65,10 @@ a {
   z-index: 0;
   background-color: #1a1a1a;
 
-  /* Dark gradient placeholder standing in for the original photo.
-     To use a real image, uncomment the line below and remove the gradients. */
-  /* background-image: url('../images/home.jpg'); */
+  /* Homepage photo with a dark overlay for text readability. */
   background-image:
-    linear-gradient(100deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.75) 100%),
-    radial-gradient(circle at 75% 30%, #4a4a4a 0%, #1a1a1a 65%);
+    linear-gradient(100deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.75) 100%),
+    url('../home_img.png');
 
   background-size: cover;
   background-position: 50% 50%;
@@ -84,7 +82,7 @@ a {
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 10%;
   width: 25%;
   height: 100vh;
   z-index: 10;
@@ -129,8 +127,8 @@ a {
 
 .primary-nav a {
   font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 25px;
+  line-height: 48px;
   color: var(--text-secondary);
   transition: color 0.2s ease-in-out;
 }
@@ -152,13 +150,39 @@ a {
 }
 
 .social a {
-  font-size: 13px;
-  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
   color: var(--text-secondary);
   transition: color 0.2s ease-in-out;
 }
 
 .social a:hover {
+  color: var(--orange);
+}
+
+/* Homepage: transparent sidebar so the background image is full-screen */
+body.home .sidebar {
+  background: transparent;
+  border-right: none;
+}
+
+body.home .sidebar .primary-nav a {
+  color: var(--off-white);
+}
+
+body.home .sidebar .primary-nav li.active a {
+  color: var(--orange);
+}
+
+body.home .sidebar .social a {
+  color: var(--off-white);
+}
+
+body.home .sidebar .social a:hover {
   color: var(--orange);
 }
 
@@ -604,6 +628,10 @@ a {
   color: var(--orange);
 }
 
+.link-list a i {
+  margin-right: 10px;
+}
+
 .link-list .tag {
   font-size: 12px;
   letter-spacing: 0.5px;
@@ -675,6 +703,10 @@ a {
 .footer__social {
   display: flex;
   gap: 16px;
+}
+
+.footer__social a {
+  font-size: 18px;
 }
 
 /* Responsive tweaks for content pages */
