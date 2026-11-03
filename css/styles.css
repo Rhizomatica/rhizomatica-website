@@ -82,7 +82,7 @@ a {
 .sidebar {
   position: fixed;
   top: 0;
-  left: 10%;
+  left: 0;
   width: 25%;
   height: 100vh;
   z-index: 10;
@@ -465,6 +465,20 @@ body.home .sidebar .social a:hover {
   max-width: 820px;
 }
 
+/* Cover image at the top of a page */
+.cover {
+  margin: 0 0 32px;
+}
+
+.cover img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%);
+}
+
 .page__title {
   margin: 0 0 20px;
   font-family: var(--font-serif);
@@ -526,6 +540,36 @@ body.home .sidebar .social a:hover {
 
 .cards--single {
   grid-template-columns: 1fr;
+}
+
+/* Person cards (team photos) */
+.card--person {
+  padding: 0;
+  overflow: hidden;
+}
+
+.card--person .card__body {
+  padding: 16px 20px 20px;
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: grayscale(100%);
+  background: var(--gray-light);
+}
+
+.card__img--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--text-muted);
 }
 
 .card {
