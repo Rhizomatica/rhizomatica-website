@@ -647,6 +647,10 @@ body.home .sidebar .social a:hover {
   border-color: var(--orange);
 }
 
+.button i {
+  margin-right: 8px;
+}
+
 /* Resource / link lists */
 .link-list {
   list-style: none;
