@@ -29,57 +29,8 @@
        photo by uncommenting the background-image line in css/styles.css. -->
   <div class="hero-bg" aria-hidden="true"></div>
 
-  <!-- ===== Desktop sidebar ===== -->
-  <header class="sidebar">
-    <a href="index.html" class="logo" aria-label="rhizomatica — home">
-      <svg class="logo__svg" viewBox="0 0 201 201"><use href="#logo-mark"></use></svg>
-    </a>
+  <div id="site-navbar"></div>
 
-    <nav class="primary-nav" aria-label="Primary navigation">
-      <ul>
-        <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="who-we-are.html">Who We Are</a></li>
-        <li><a href="what-we-do.html">What We Do</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-
-    <nav class="social" aria-label="Social links">
-      <a href="https://twitter.com/rhizomatica" aria-label="@rhizomatica" title="@rhizomatica"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
-      <a href="https://www.linkedin.com/company/rhizomatica" aria-label="linkedin" title="linkedin"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
-      <a href="https://github.com/rhizomatica" aria-label="github" title="github"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-    </nav>
-  </header>
-
-  <!-- ===== Mobile header ===== -->
-  <header class="mobile-header">
-    <a href="index.html" class="logo logo--mobile" aria-label="rhizomatica — home">
-      <svg class="logo__svg" viewBox="0 0 201 201"><use href="#logo-mark"></use></svg>
-    </a>
-
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-    <ul>
-      <li class="active"><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="who-we-are.html">Who We Are</a></li>
-      <li><a href="what-we-do.html">What We Do</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- ===== Hero ===== -->
   <main class="hero">
     <div class="hero__content">
       <h1 class="hero__title">
@@ -90,11 +41,14 @@
     </div>
 
     <div class="hero__cta">
-      <a href="#" class="cta-arrow">
-        For more information <strong>Click here</strong>
+      <a href="about.html" class="cta-arrow">
+        <span>For more information <strong>Click here</strong></span>
+        <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
       </a>
     </div>
   </main>
+
+  <footer class="footer" id="site-footer"></footer>
 
   <script src="js/main.js"></script>
 </body>

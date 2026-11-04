@@ -16,12 +16,17 @@ rhizomatica/
 ├── who-we-are.html     # Who We Are: team, HERMES team, board, supporters
 ├── what-we-do.html     # What We Do: four strategies + projects
 ├── resources.html      # Resources: guides/manuals + video channels
+├── videos-hf.html      # HF Radio: embedded video tutorials
 ├── blog.html           # Blog: static post listing
-├── contact.html        # Contact: form + email address
+├── contact.html        # Contact: form (reCAPTCHA) + email address
+├── contact.php         # Contact form handler (validates reCAPTCHA, sends email)
+├── navbar.html         # Shared navigation partial (sidebar + mobile nav)
+├── footer.html         # Shared footer partial
+├── docs/               # Downloadable PDFs (guides and manuals)
 ├── css/
 │   └── styles.css      # All styles (colors, fonts, layout, responsive rules)
 ├── js/
-│   └── main.js         # Mobile hamburger-menu toggle (no dependencies)
+│   └── main.js         # Mobile menu, accordion, active nav, partial injection
 ├── .github/
 │   └── workflows/
 │       └── pages.yml   # GitHub Actions workflow that deploys to GitHub Pages
@@ -31,13 +36,17 @@ rhizomatica/
 - **index.html** — semantic structure of the page. The orange logo is an inline
   SVG defined once as a `<symbol>` and reused with `<use>`.
 - **Content pages** — one HTML file per top-level section (`about.html`,
-  `who-we-are.html`, `what-we-do.html`, `resources.html`, `blog.html`,
-  `contact.html`), each sharing the same sidebar/navigation and content styles.
+  `who-we-are.html`, `what-we-do.html`, `resources.html`, `videos-hf.html`,
+  `blog.html`, `contact.html`), each sharing the same navigation and content
+  styles.
+- **navbar.html / footer.html** — shared partials injected into each page's
+  `<div id="site-navbar">` / `<footer id="site-footer">` placeholder by
+  `js/main.js`, so navigation and footer content live in one place.
 - **css/styles.css** — the design system: the orange accent `#ED4E0F`, the gray
   sidebar `#EAEBEB`, Crimson Text / Source Sans typography, the fixed left
   sidebar, the full-viewport hero, and the mobile layout breakpoints.
-- **js/main.js** — a tiny vanilla-JS handler that opens/closes the mobile menu
-  and toggles the hamburger icon.
+- **js/main.js** — injects `navbar.html`/`footer.html`, opens/closes the mobile
+  menu, highlights the active nav item, and powers the resources accordion.
 
 ## Running locally
 
@@ -56,6 +65,12 @@ Or serve it with a local static server (recommended, keeps paths clean):
 python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
+
+> **Note:** the navbar and footer are loaded from `navbar.html` / `footer.html`
+> via JavaScript, so the site needs to be served by a web server over HTTP or
+> HTTPS (for example the `python3 -m http.server` option above, or GitHub
+> Pages). Opening the files directly with the `file://` protocol will leave the
+> navbar and footer empty.
 
 ## Publishing to GitHub Pages
 
@@ -103,6 +118,24 @@ To use it:
 
 1. Push the repository to GitHub (the workflow file is already in place).
 2. Open **Settings → Pages** and set **Source** to `GitHub Actions`.
+
+## Contact form
+
+The contact page (`contact.html`) uses **Google reCAPTCHA v2** and posts to
+`contact.php`, which validates the captcha server-side and emails the message.
+
+To activate it:
+
+1. Get a reCAPTCHA **site key** and **secret key** from
+   [google.com/recaptcha/admin](https://www.google.com/recaptcha/admin).
+2. Put the **site key** in `contact.html` (replace `YOUR_RECAPTCHA_SITE_KEY`).
+3. Put the **secret key** in `contact.php` (replace `YOUR_RECAPTCHA_SECRET_KEY`),
+   and set `$recipient` and `$from` to your real addresses.
+
+> **Important:** `contact.php` needs a PHP-enabled web server. GitHub Pages only
+> serves static files and will **not** run PHP, so the contact form must be
+> hosted on a server with PHP (shared hosting, VPS, etc.). The rest of the site
+> can remain on GitHub Pages.
 
 ## Customizing
 
