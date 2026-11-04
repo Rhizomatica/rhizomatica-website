@@ -23,53 +23,7 @@
     </symbol>
   </svg>
 
-  <header class="sidebar">
-    <a href="index.html" class="logo" aria-label="rhizomatica — home">
-      <svg class="logo__svg" viewBox="0 0 201 201"><use href="#logo-mark"></use></svg>
-    </a>
-
-    <nav class="primary-nav" aria-label="Primary navigation">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="who-we-are.html">Who We Are</a></li>
-        <li><a href="what-we-do.html">What We Do</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li class="active"><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-
-    <nav class="social" aria-label="Social links">
-      <a href="https://twitter.com/rhizomatica" aria-label="@rhizomatica" title="@rhizomatica"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
-      <a href="https://www.linkedin.com/company/rhizomatica" aria-label="linkedin" title="linkedin"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
-      <a href="https://github.com/rhizomatica" aria-label="github" title="github"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-    </nav>
-  </header>
-
-  <header class="mobile-header">
-    <a href="index.html" class="logo logo--mobile" aria-label="rhizomatica — home">
-      <svg class="logo__svg" viewBox="0 0 201 201"><use href="#logo-mark"></use></svg>
-    </a>
-
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="who-we-are.html">Who We Are</a></li>
-      <li><a href="what-we-do.html">What We Do</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li class="active"><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <div id="site-navbar"></div>
 
   <main class="page">
     <div class="page__inner">
@@ -81,10 +35,11 @@
       <p class="page__lead">We are always looking for meaningful collaborations and opportunities to learn about new places and things.</p>
 
       <section class="section">
-        <!-- Static sites can't send email directly. This form posts to Formspree;
-             replace YOUR_FORM_ID with a real form ID, then add a captcha
-             (hCaptcha / Turnstile / reCAPTCHA) field before the submit button. -->
-        <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <!-- Posts to contact.php, which validates the reCAPTCHA and sends the email.
+             Replace YOUR_RECAPTCHA_SITE_KEY below (and the matching secret key in
+             contact.php) with keys from https://www.google.com/recaptcha/admin -->
+        <div class="form-message" id="formMessage" hidden></div>
+        <form class="form" action="contact.php" method="POST">
           <div class="field">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
@@ -101,6 +56,9 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" required></textarea>
           </div>
+          <div class="field">
+            <div class="g-recaptcha" data-sitekey="6Lc8yw4uAAAAAPgUFNKlYI4_AljN1rQhZh-2LU6x"></div>
+          </div>
           <button type="submit" class="button">Send</button>
         </form>
         <p style="margin-top:20px">You can also email us directly at <a href="mailto:contact@rhizomatica.org">contact@rhizomatica.org</a>.</p>
@@ -108,15 +66,29 @@
     </div>
   </main>
 
-  <footer class="footer">
-    <span>© 2015–2026 Rhizomatica</span>
-    <nav class="footer__social" aria-label="Social links">
-      <a href="https://twitter.com/rhizomatica" aria-label="@rhizomatica" title="@rhizomatica"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
-      <a href="https://www.linkedin.com/company/rhizomatica" aria-label="linkedin" title="linkedin"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
-      <a href="https://github.com/rhizomatica" aria-label="github" title="github"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-    </nav>
-  </footer>
+  <footer class="footer" id="site-footer"></footer>
 
   <script src="js/main.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    // Show a success/error message after contact.php processes the form
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var status = params.get('status');
+      var el = document.getElementById('formMessage');
+      if (!el || !status) { return; }
+      el.hidden = false;
+      if (status === 'success') {
+        el.className = 'form-message form-message--success';
+        el.textContent = 'Thank you! Your message has been sent.';
+      } else {
+        el.className = 'form-message form-message--error';
+        el.textContent = params.get('msg') || 'Something went wrong. Please try again.';
+      }
+      if (window.history && history.replaceState) {
+        history.replaceState(null, '', window.location.pathname);
+      }
+    })();
+  </script>
 </body>
 </html>
