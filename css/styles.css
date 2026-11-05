@@ -589,6 +589,23 @@ body.home .sidebar .social a:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
+.card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: var(--gray-light);
+  color: var(--orange);
+}
+
+.card__icon i {
+  font-size: 24px;
+  line-height: 1;
+}
+
 .card__title {
   margin: 0 0 6px;
   font-size: 19px;
