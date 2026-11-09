@@ -134,7 +134,7 @@ a {
 
 .primary-nav a {
   font-family: var(--font-sans);
-  font-size: 25px;
+  font-size: 20px;
   line-height: 48px;
   color: var(--text-secondary);
   transition: color 0.2s ease-in-out;
@@ -231,51 +231,6 @@ body.home .sidebar .social a:hover {
   font-weight: 700;
 }
 
-.hero__cta {
-  position: absolute;
-  right: 5%;
-  bottom: 150px;
-  text-align: right;
-}
-
-/* Arrow CTA button */
-.cta-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  line-height: 1.2;
-  color: #fff;
-  padding: 16px 22px;
-  min-height: 56px;
-  border: 2px solid var(--orange);
-  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
-    color 0.2s ease-in-out;
-}
-
-.cta-arrow strong {
-  font-weight: 700;
-}
-
-.cta-arrow i {
-  font-size: 20px;
-  color: var(--orange);
-  transition: transform 0.25s ease-in-out, color 0.2s ease-in-out;
-}
-
-.cta-arrow:hover {
-  background-color: var(--orange);
-  border-color: var(--orange);
-  color: #fff;
-}
-
-.cta-arrow:hover i {
-  color: #fff;
-  transform: translateX(6px);
-}
 
 /* ==========================================================================
    Mobile header + navigation
@@ -435,10 +390,6 @@ body.home .sidebar .social a:hover {
     padding: 0 20px;
   }
 
-  .hero__cta {
-    right: 20px;
-    bottom: 120px;
-  }
 }
 
 /* Small phones: shrink the hero title */
