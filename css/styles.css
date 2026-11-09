@@ -591,6 +591,44 @@ body.home .sidebar .social a:hover {
   line-height: 1;
 }
 
+.card__logo {
+  margin: 0 0 16px;
+}
+
+.card__logo img {
+  display: block;
+  max-height: 44px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+/* Project cards: logo column + text column */
+.card--project {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px 28px;
+  align-items: center;
+}
+
+.card--project .card__logo {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card--project .card__logo img {
+  max-height: clamp(88px, 6vw, 72px);
+  max-width: 100%;
+}
+
+@media (max-width: 39.9375em) {
+  .card--project {
+    grid-template-columns: 1fr;
+  }
+}
+
 .card__title {
   margin: 0 0 6px;
   font-size: 19px;
