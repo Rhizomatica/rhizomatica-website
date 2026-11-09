@@ -486,6 +486,40 @@ body.home .sidebar .social a:hover {
   margin-top: 16px;
 }
 
+/* Sections with an inline image (About page) */
+.section__media-figure {
+  margin: 24px 0 0;
+}
+
+.section__media-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(100%);
+  background: var(--gray-light);
+}
+
+@media (min-width: 40em) {
+  .section--media {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .section--media .section__media-body {
+    flex: 1;
+  }
+
+  .section--media .section__media-figure {
+    flex: 1;
+    margin: 0;
+  }
+
+  .section--media-left {
+    flex-direction: row-reverse;
+  }
+}
+
 /* Card grids (team, strategies, projects) */
 .cards {
   display: grid;
