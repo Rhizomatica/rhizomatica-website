@@ -641,6 +641,7 @@ body.home .sidebar .social a:hover {
   border-radius: 0;
   padding: 0 36px;
   transition: all 0.2s ease-in-out;
+  margin-top: 16px;
 }
 
 .button:hover {
