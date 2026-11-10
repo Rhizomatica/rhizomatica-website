@@ -1,70 +1,144 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta
+    http-equiv="x-ua-compatible"
+    content="ie=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1"
+  >
 
   <title>Contact // rhizomatica</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  >
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  >
 </head>
 
 <body class="page-contact">
 
-  
+
 
   <div id="site-navbar"></div>
 
   <main class="page">
     <div class="page__inner">
       <figure class="cover">
-        <img src="images/peter-and-nantu-hermes.png" alt="Rafael with HERMES in Brazil">
+        <img
+          src="images/peter-and-nantu-hermes.png"
+          alt="Rafael with HERMES in Brazil"
+        >
         <h1 class="page__title">Contact us</h1>
       </figure>
-      <p class="page__lead">We are always looking for meaningful collaborations and opportunities to learn about new places and things.</p>
+      <p class="page__lead">We are always looking for meaningful collaborations and opportunities to learn about new
+        places and things.</p>
 
       <section class="section">
         <!-- Posts to contact.php, which validates Cloudflare Turnstile and sends the email.
              Replace YOUR_TURNSTILE_SITE_KEY below (and the matching secret key in
              contact.php) with keys from https://dash.cloudflare.com/ (Turnstile) -->
-        <div class="form-message" id="formMessage" hidden></div>
-        <form class="form" action="contact.php" method="POST">
+        <div
+          class="form-message"
+          id="formMessage"
+          hidden
+        ></div>
+        <form
+          class="form"
+          action="contact.php"
+          method="POST"
+        >
           <div class="field">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+            >
           </div>
           <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+            >
           </div>
           <div class="field">
             <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject">
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+            >
           </div>
           <div class="field">
             <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
+            <textarea
+              id="message"
+              name="message"
+              required
+            ></textarea>
           </div>
           <div class="field">
-            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
+
+            <!-- Cloudflare Turnstile YOUR_TURNSTILE_SITE_KEY -->
+            <div
+              class="cf-turnstile"
+              data-sitekey="YOUR_TURNSTILE_SITE_KEY"
+            ></div>
           </div>
-          <button type="submit" class="button"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send</button>
+          <button
+            type="submit"
+            class="button"
+          ><i
+              class="fa-solid fa-paper-plane"
+              aria-hidden="true"
+            ></i> Send</button>
         </form>
-        <p class="contact__email">You can also email us directly at <a href="mailto:contact@rhizomatica.org"><i class="fa-solid fa-envelope" aria-hidden="true"></i> contact@rhizomatica.org</a>.</p>
+        <p class="contact__email">You can also email us directly at <a href="mailto:contact@rhizomatica.org"><i
+              class="fa-solid fa-envelope"
+              aria-hidden="true"
+            ></i> contact@rhizomatica.org</a>.</p>
       </section>
     </div>
   </main>
 
-  <footer class="footer" id="site-footer"></footer>
+  <footer
+    class="footer"
+    id="site-footer"
+  ></footer>
 
   <script src="js/main.js"></script>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
   <script>
     // Show a success/error message after contact.php processes the form
     (function () {
@@ -86,4 +160,5 @@
     })();
   </script>
 </body>
+
 </html>

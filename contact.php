@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contact form handler — rhizomatica.org
  *
@@ -14,10 +15,10 @@
 /* ------------------------------------------------------------------ *
  *  Configuration — edit these values
  * ------------------------------------------------------------------ */
-$recipient = 'contact@rhizomatica.org';        // destination mailbox
-$secretKey = 'YOUR_TURNSTILE_SECRET_KEY';             // Cloudflare Turnstile secret key
-$from      = 'no-reply@rhizomatica.org';       // valid sender on your domain
-$redirect  = 'contact.html';                   // page to return to
+$recipient = 'contact@rhizomatica.org';         // destination mailbox
+$secretKey = 'YOUR_TURNSTILE_SECRET_KEY';       // Cloudflare Turnstile secret key
+$from      = 'no-reply@rhizomatica.org';        // valid sender on your domain
+$redirect  = 'contact.html';                    // page to return to
 
 /* ------------------------------------------------------------------ *
  *  Only handle POST requests
@@ -118,8 +119,8 @@ if (!empty($errors)) {
 $subjectLine = $subject !== '' ? $subject : 'New message from the website';
 $body = "Name: $name\nEmail: $email\n\n$message";
 $headers = "From: Rhizomatica Website <$from>\r\n" .
-           "Reply-To: $email\r\n" .
-           "Content-Type: text/plain; charset=UTF-8\r\n";
+    "Reply-To: $email\r\n" .
+    "Content-Type: text/plain; charset=UTF-8\r\n";
 
 if (@mail($recipient, $subjectLine, $body, $headers)) {
     redirect_back('success');
