@@ -878,7 +878,8 @@ body.home .sidebar .social a:hover {
   border-bottom: 1px solid var(--border-light);
 
   span {
-    font-weight: 400;
+    font-weight: 600;
+    font-size: 17px;
   }
 }
 
