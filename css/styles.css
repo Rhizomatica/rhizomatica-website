@@ -597,6 +597,11 @@ body.home .sidebar .social a:hover {
   background: var(--gray-light);
 }
 
+/* Portrait photos keep their natural aspect ratio instead of the 1:1 square crop */
+.card__img--natural {
+  aspect-ratio: auto;
+}
+
 .card__img--placeholder {
   display: flex;
   align-items: center;
