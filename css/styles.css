@@ -98,6 +98,7 @@ a {
   background: var(--gray-light);
   border-right: 1px solid var(--border-light);
   padding: 80px 2% 40px;
+  overflow-y: auto;
 }
 
 .logo {
@@ -305,8 +306,9 @@ body.home .sidebar .social a:hover {
   z-index: 9;
   background: var(--off-white);
   box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
+  visibility: hidden;
   transform: translateY(-120%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
 }
 
 .mobile-nav ul {
@@ -338,6 +340,14 @@ body.home .sidebar .social a:hover {
 .mobile-nav li.active a {
   color: var(--orange);
   font-weight: 700;
+}
+
+.primary-nav a:focus-visible,
+.social a:focus-visible,
+.mobile-nav a:focus-visible,
+.hamburger:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
 }
 
 /* ==========================================================================
@@ -383,7 +393,9 @@ body.home .sidebar .social a:hover {
   }
 
   .mobile-nav.open {
+    visibility: visible;
     transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
   }
 
   .hero__content {
