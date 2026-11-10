@@ -1019,8 +1019,8 @@ body.home .sidebar .social a:hover {
 /* Document thumbnail shown in the accordion header */
 .accordion__thumb {
   flex: none;
-  width: 44px;
-  height: 56px;
+  width: 132x;
+  height: 224px;
   object-fit: cover;
   border: 1px solid var(--border-light);
   background: var(--gray-light);
@@ -1306,5 +1306,10 @@ body.home .sidebar .social a:hover {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .accordion__thumb {
+    width: 44x;
+    height: 66px;
   }
 }
