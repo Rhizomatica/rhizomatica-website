@@ -435,6 +435,7 @@ body.home .sidebar .social a:hover {
 
 /* Cover image at the top of a page */
 .cover {
+  position: relative;
   margin: 0 0 32px;
 }
 
@@ -447,14 +448,46 @@ body.home .sidebar .social a:hover {
   filter: grayscale(100%);
 }
 
+/* Dark scrim so the overlaid title stays readable */
+.cover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
 .page__title {
   margin: 0 0 20px;
   font-family: var(--font-serif);
-  font-size: 46px;
+  font-size: 4em;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 1px;
   color: var(--text);
+}
+
+/* When the title sits inside a cover figure, overlay it on the photo */
+.cover .page__title {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 32px;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 39.9375em) {
+  .cover .page__title {
+    padding: 20px;
+    font-size: 30px;
+  }
 }
 
 .page__lead {
@@ -1252,7 +1285,7 @@ body.home .sidebar .social a:hover {
   }
 
   .page__title {
-    font-size: 34px;
+    font-size: 2em;
   }
 
   .cards {
