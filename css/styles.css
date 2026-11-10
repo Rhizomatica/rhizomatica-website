@@ -97,14 +97,14 @@ a {
   flex-direction: column;
   background: var(--gray-light);
   border-right: 1px solid var(--border-light);
-  padding: 80px 2% 40px;
+  padding: 60px 3% 40px;
   overflow-y: auto;
 }
 
 .logo {
   display: block;
   width: 70px;
-  height: 70px;
+  height: 40px;
   margin-bottom: 60px;
 }
 
@@ -725,7 +725,7 @@ body.home .sidebar .social a:hover {
   margin: 0;
 }
 
-.post__body p + p {
+.post__body p+p {
   margin-top: 16px;
 }
 
