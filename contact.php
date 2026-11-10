@@ -2,7 +2,7 @@
 /**
  * Contact form handler — rhizomatica.org
  *
- * 1. Validates the Google reCAPTCHA v2 ("I'm not a robot") response.
+ * 1. Validates the Cloudflare Turnstile response.
  * 2. Sanitizes the submitted fields.
  * 3. Sends the message by email and redirects back to the form.
  *
@@ -15,7 +15,7 @@
  *  Configuration — edit these values
  * ------------------------------------------------------------------ */
 $recipient = 'contact@rhizomatica.org';        // destination mailbox
-$secretKey = '6Lc8yw4uAAAAAMvIr8JH0pYQpYHt1qpeJEPV1BFU';      // Google reCAPTCHA secret key
+$secretKey = 'YOUR_TURNSTILE_SECRET_KEY';             // Cloudflare Turnstile secret key
 $from      = 'no-reply@rhizomatica.org';       // valid sender on your domain
 $redirect  = 'contact.html';                   // page to return to
 
@@ -41,9 +41,9 @@ function redirect_back($status, $message = '')
     exit;
 }
 
-function verify_recaptcha($secret, $response, $remoteIp)
+function verify_turnstile($secret, $response, $remoteIp)
 {
-    $url  = 'https://www.google.com/recaptcha/api/siteverify';
+    $url  = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
     $data = array(
         'secret'   => $secret,
         'response' => $response,
@@ -99,12 +99,12 @@ if (preg_match('/[\r\n]/', $name) || preg_match('/[\r\n]/', $email) || preg_matc
 }
 
 /* ------------------------------------------------------------------ *
- *  Verify the reCAPTCHA
+ *  Verify Cloudflare Turnstile
  * ------------------------------------------------------------------ */
-$captchaResponse = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+$captchaResponse = isset($_POST['cf-turnstile-response']) ? $_POST['cf-turnstile-response'] : '';
 if ($captchaResponse === '') {
     $errors[] = 'Please complete the CAPTCHA.';
-} elseif (!verify_recaptcha($secretKey, $captchaResponse, $_SERVER['REMOTE_ADDR'])) {
+} elseif (!verify_turnstile($secretKey, $captchaResponse, $_SERVER['REMOTE_ADDR'])) {
     $errors[] = 'CAPTCHA verification failed. Please try again.';
 }
 

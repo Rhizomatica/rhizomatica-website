@@ -30,9 +30,9 @@
       <p class="page__lead">We are always looking for meaningful collaborations and opportunities to learn about new places and things.</p>
 
       <section class="section">
-        <!-- Posts to contact.php, which validates the reCAPTCHA and sends the email.
-             Replace YOUR_RECAPTCHA_SITE_KEY below (and the matching secret key in
-             contact.php) with keys from https://www.google.com/recaptcha/admin -->
+        <!-- Posts to contact.php, which validates Cloudflare Turnstile and sends the email.
+             Replace YOUR_TURNSTILE_SITE_KEY below (and the matching secret key in
+             contact.php) with keys from https://dash.cloudflare.com/ (Turnstile) -->
         <div class="form-message" id="formMessage" hidden></div>
         <form class="form" action="contact.php" method="POST">
           <div class="field">
@@ -52,7 +52,7 @@
             <textarea id="message" name="message" required></textarea>
           </div>
           <div class="field">
-            <div class="g-recaptcha" data-sitekey="6Lc8yw4uAAAAAPgUFNKlYI4_AljN1rQhZh-2LU6x"></div>
+            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
           </div>
           <button type="submit" class="button"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send</button>
         </form>
@@ -64,7 +64,7 @@
   <footer class="footer" id="site-footer"></footer>
 
   <script src="js/main.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script>
     // Show a success/error message after contact.php processes the form
     (function () {
