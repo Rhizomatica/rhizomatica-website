@@ -58,6 +58,11 @@
       page = 'resources.html';
     }
 
+    // Individual blog posts highlight the Blog section
+    if (document.body.classList.contains('page-blog') && page !== 'blog.html') {
+      page = 'blog.html';
+    }
+
     var links = document.querySelectorAll('.primary-nav a, .mobile-nav a');
     for (var i = 0; i < links.length; i++) {
       if (links[i].getAttribute('href') === page) {

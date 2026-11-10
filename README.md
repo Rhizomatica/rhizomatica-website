@@ -17,7 +17,8 @@ rhizomatica/
 ├── what-we-do.html     # What We Do: four strategies + projects
 ├── resources.html      # Resources: guides/manuals + video channels
 ├── videos-hf.html      # HF Radio: embedded video tutorials
-├── blog.html           # Blog: static post listing
+├── blog.html           # Blog: post listing (links to the individual posts below)
+├── <slug>.html         # Individual blog post pages (9 posts, one file per post)
 ├── contact.html        # Contact: form (reCAPTCHA) + email address
 ├── contact.php         # Contact form handler (validates reCAPTCHA, sends email)
 ├── navbar.html         # Shared navigation partial (sidebar + mobile nav)
@@ -39,6 +40,10 @@ rhizomatica/
   `who-we-are.html`, `what-we-do.html`, `resources.html`, `videos-hf.html`,
   `blog.html`, `contact.html`), each sharing the same navigation and content
   styles.
+- **Blog posts** — each post is a standalone HTML page at the repository root,
+  named after its original URL slug (for example
+  `5g-a-terminal-condition.html`), and is linked from `blog.html`. Post images
+  live in `images/blog/`.
 - **navbar.html / footer.html** — shared partials injected into each page's
   `<div id="site-navbar">` / `<footer id="site-footer">` placeholder by
   `js/main.js`, so navigation and footer content live in one place.
