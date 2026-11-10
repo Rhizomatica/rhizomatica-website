@@ -841,6 +841,16 @@ body.home .sidebar .social a:hover {
   padding-left: 16px;
 }
 
+/* Document thumbnail shown in the accordion header */
+.accordion__thumb {
+  flex: none;
+  width: 44px;
+  height: 56px;
+  object-fit: cover;
+  border: 1px solid var(--border-light);
+  background: var(--gray-light);
+}
+
 .link-list .link-list__disabled {
   display: flex;
   justify-content: space-between;
