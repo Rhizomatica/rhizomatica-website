@@ -3,8 +3,9 @@
 A lightweight, dependency-free HTML / CSS / JS recreation of the
 [rhizomatica.org](https://www.rhizomatica.org/) homepage. It focuses on the
 visual design (layout, palette, typography, and interactions) rather than
-content, and is intended to be hosted as a static site — for example on
-GitHub Pages.
+content. There is no build step: the site is a set of plain static files plus a
+small PHP script (`contact.php`) that handles the contact form, and it is
+published by uploading the files to a PHP-enabled web server over FTP.
 
 ## Project structure
 
@@ -19,8 +20,8 @@ rhizomatica/
 ├── videos-hf.html      # HF Radio: embedded video tutorials
 ├── blog.html           # Blog: post listing (links to the individual posts below)
 ├── blog/               # Individual blog post pages (10 posts, one file per post)
-├── contact.html        # Contact: form (reCAPTCHA) + email address
-├── contact.php         # Contact form handler (validates reCAPTCHA, sends email)
+├── contact.html        # Contact: form (Cloudflare Turnstile) + email address
+├── contact.php         # Contact form handler (validates Turnstile, sends email)
 ├── navbar.html         # Shared navigation partial (sidebar + mobile nav)
 ├── footer.html         # Shared footer partial
 ├── docs/               # Downloadable PDFs (guides and manuals)
@@ -28,9 +29,6 @@ rhizomatica/
 │   └── styles.css      # All styles (colors, fonts, layout, responsive rules)
 ├── js/
 │   └── main.js         # Mobile menu, accordion, active nav, partial injection
-├── .github/
-│   └── workflows/
-│       └── pages.yml   # GitHub Actions workflow that deploys to GitHub Pages
 └── README.md
 ```
 
@@ -73,74 +71,70 @@ python3 -m http.server 8000
 
 > **Note:** the navbar and footer are loaded from `navbar.html` / `footer.html`
 > via JavaScript, so the site needs to be served by a web server over HTTP or
-> HTTPS (for example the `python3 -m http.server` option above, or GitHub
-> Pages). Opening the files directly with the `file://` protocol will leave the
+> HTTPS (for example the `python3 -m http.server` option above, or your FTP
+> host). Opening the files directly with the `file://` protocol will leave the
 > navbar and footer empty.
 
-## Publishing to GitHub Pages
+## Publishing via FTP
 
-This is a plain static site with no build tooling, so the easiest approach is
-GitHub's "deploy from a branch" option.
+The site is published by uploading the files to a PHP-enabled web server over
+FTP (shared hosting, VPS, etc.). There is no build step and no deployment
+pipeline — the files on the server are the live site.
 
-### Option A — Deploy from a branch (recommended)
+### What to upload
 
-1. Create a repository on GitHub and push the project to it:
+Upload everything in the project root, preserving the folder structure. The
+only files to skip are development-only and should never live on the server:
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-repo>.git
-   git push -u origin main
-   ```
+- `.git/` — local version-control data
+- `.github/` — GitHub-only configuration
+- `README.md` — documentation
 
-2. On GitHub, open the repository and go to **Settings → Pages**.
 
-3. Under **Build and deployment**, set:
-   - **Source:** `Deploy from a branch`
-   - **Branch:** `main` (or `master`)
-   - **Folder:** `/ (root)`
+Everything else is required by the live site, including:
 
-4. Click **Save**. After a minute or two the site will be live at:
+- `home_img.png` — referenced by `css/styles.css` as the hero background
+- `docs/` — the downloadable PDF guides linked from `resources.html`
+- `navbar.html` / `footer.html` — fetched by the pages via JavaScript, so they
+  must sit in the same directory as the HTML pages
+- `contact.php` — the contact form handler (the host must run PHP)
 
-   ```
-   https://<your-username>.github.io/<your-repo>/
-   ```
+### Steps
 
-> Note: if the repository is named `<your-username>.github.io`, the site will be
-> served directly at `https://<your-username>.github.io/` instead.
+1. In your FTP client, connect to the host and open the web root (often
+   `public_html/`, `www/` or `htdocs/`).
+2. Upload the **contents** of the repository root (not the enclosing
+   `rhizomatica/` folder) into the web root, keeping the `css/`, `js/`,
+   `docs/`, `blog/` and `images/` folders intact.
+3. Configure the contact form (see below), then open the site in a browser and
+   submit a test message to confirm everything works.
 
-### Option B — Deploy with GitHub Actions
-
-A ready-to-use workflow is included at
-[`.github/workflows/pages.yml`](.github/workflows/pages.yml). It publishes the
-repository root on every push to `main` (and on manual runs) using the official
-`actions/configure-pages`, `actions/upload-pages-artifact`, and
-`actions/deploy-pages` actions.
-
-To use it:
-
-1. Push the repository to GitHub (the workflow file is already in place).
-2. Open **Settings → Pages** and set **Source** to `GitHub Actions`.
+> **Tip:** if your FTP client has a synchronize/mirror mode, use it so future
+> edits only upload the files that changed.
 
 ## Contact form
 
-The contact page (`contact.html`) uses **Google reCAPTCHA v2** and posts to
-`contact.php`, which validates the captcha server-side and emails the message.
+The contact page (`contact.html`) uses **Cloudflare Turnstile** and posts to
+`contact.php`, which verifies the Turnstile token server-side and emails the
+message.
 
 To activate it:
 
-1. Get a reCAPTCHA **site key** and **secret key** from
-   [google.com/recaptcha/admin](https://www.google.com/recaptcha/admin).
-2. Put the **site key** in `contact.html` (replace `YOUR_RECAPTCHA_SITE_KEY`).
-3. Put the **secret key** in `contact.php` (replace `YOUR_RECAPTCHA_SECRET_KEY`),
-   and set `$recipient` and `$from` to your real addresses.
+1. Create a **Turnstile** widget in the
+   [Cloudflare dashboard](https://dash.cloudflare.com/) and copy the **site
+   key** and **secret key**. Add your domain(s) (for example `rhizomatica.org`
+   and `www.rhizomatica.org`) to the widget's hostname list.
+2. Put the **site key** in `contact.html` (replace `YOUR_TURNSTILE_SITE_KEY`).
+3. Put the **secret key** in `contact.php` (replace
+   `YOUR_TURNSTILE_SECRET_KEY`), and set `$recipient` and `$from` to your real
+   addresses.
 
-> **Important:** `contact.php` needs a PHP-enabled web server. GitHub Pages only
-> serves static files and will **not** run PHP, so the contact form must be
-> hosted on a server with PHP (shared hosting, VPS, etc.). The rest of the site
-> can remain on GitHub Pages.
+> **Important:** `contact.php` needs a PHP-enabled web server. Because the site
+> is published to a PHP host over FTP, the contact form lives on the same
+> server as the rest of the site — no separate setup is needed.
+>
+> Keep the **secret key** server-side only: never put it in an `.html` file or
+> anywhere it could be downloaded publicly.
 
 ## Customizing
 
@@ -149,5 +143,5 @@ To activate it:
   the `url()` in the `.hero-bg` rule.
 - **Colors / fonts** — all values are CSS custom properties at the top of
   `css/styles.css`, so you can re-theme the whole site in one place.
-- **Navigation** — the menu items in `index.html` currently link to `#`. Point
-  them at real pages as content is added.
+- **Navigation** — the menu lives in `navbar.html`, which is injected into every
+  page by `js/main.js`; edit it once to update the whole site's menu.
