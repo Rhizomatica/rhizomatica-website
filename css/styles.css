@@ -664,6 +664,21 @@ body.home .sidebar .social a:hover {
   text-decoration: underline;
 }
 
+/* Clickable blog cards (whole card links to the post) */
+.card--link {
+  position: relative;
+}
+
+.card--link .card__stretched-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
 /* Blog post pages */
 .post__back {
   margin: 0 0 24px;
@@ -1106,6 +1121,18 @@ body.home .sidebar .social a:hover {
   color: #b3261e;
   border-color: #b3261e;
   background: #fdecea;
+}
+
+.contact__email {
+  margin-top: 20px;
+}
+
+.contact__email a {
+  color: var(--orange);
+}
+
+.contact__email a:hover {
+  text-decoration: underline;
 }
 
 /* Footer */
