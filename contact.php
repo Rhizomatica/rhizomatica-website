@@ -3,9 +3,8 @@
 /**
  * Contact form handler — rhizomatica.org
  *
- * 1. Validates the Cloudflare Turnstile response.
- * 2. Sanitizes the submitted fields.
- * 3. Sends the message by email and redirects back to the form.
+ * 1. Sanitizes the submitted fields.
+ * 2. Sends the message by email and redirects back to the form.
  *
  * NOTE: This file requires a PHP-enabled web server. GitHub Pages does NOT
  * run PHP, so the contact form must be hosted on a server that supports PHP
@@ -16,7 +15,6 @@
  *  Configuration — edit these values
  * ------------------------------------------------------------------ */
 $recipient = 'contact@rhizomatica.org';         // destination mailbox
-$secretKey = 'YOUR_TURNSTILE_SECRET_KEY';       // Cloudflare Turnstile secret key
 $from      = 'no-reply@rhizomatica.org';        // valid sender on your domain
 $redirect  = 'contact.html';                    // page to return to
 
@@ -40,37 +38,6 @@ function redirect_back($status, $message = '')
     }
     header('Location: ' . $redirect . $qs);
     exit;
-}
-
-function verify_turnstile($secret, $response, $remoteIp)
-{
-    $url  = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-    $data = array(
-        'secret'   => $secret,
-        'response' => $response,
-        'remoteip' => $remoteIp,
-    );
-
-    if (function_exists('curl_version')) {
-        $ch = curl_init($url);
-        curl_setopt_array($ch, array(
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => http_build_query($data),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 10,
-        ));
-        $result = curl_exec($ch);
-        curl_close($ch);
-    } else {
-        $result = @file_get_contents($url . '?' . http_build_query($data));
-    }
-
-    if ($result === false) {
-        return false;
-    }
-
-    $json = json_decode($result, true);
-    return isset($json['success']) && $json['success'] === true;
 }
 
 /* ------------------------------------------------------------------ *
@@ -97,16 +64,6 @@ if ($message === '') {
 }
 if (preg_match('/[\r\n]/', $name) || preg_match('/[\r\n]/', $email) || preg_match('/[\r\n]/', $subject)) {
     $errors[] = 'Invalid input detected.';
-}
-
-/* ------------------------------------------------------------------ *
- *  Verify Cloudflare Turnstile
- * ------------------------------------------------------------------ */
-$captchaResponse = isset($_POST['cf-turnstile-response']) ? $_POST['cf-turnstile-response'] : '';
-if ($captchaResponse === '') {
-    $errors[] = 'Please complete the CAPTCHA.';
-} elseif (!verify_turnstile($secretKey, $captchaResponse, $_SERVER['REMOTE_ADDR'])) {
-    $errors[] = 'CAPTCHA verification failed. Please try again.';
 }
 
 if (!empty($errors)) {

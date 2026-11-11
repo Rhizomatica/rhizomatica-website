@@ -2,7 +2,11 @@
 <html lang="en">
 
 <head>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="favicon.svg"
+  >
   <meta charset="utf-8">
   <meta
     http-equiv="x-ua-compatible"
@@ -38,12 +42,10 @@
       </figure>
       <p class="page__lead">We are always looking for meaningful collaborations and opportunities to learn about new
         places and things.</p>
+      <!-- Posts to contact.php, which sends the email. -->
 
-      <section class="section">
-        <!-- Posts to contact.php, which validates Cloudflare Turnstile and sends the email.
-             Replace YOUR_TURNSTILE_SITE_KEY below (and the matching secret key in
-             contact.php) with keys from https://dash.cloudflare.com/ (Turnstile) -->
-        <div
+      <!-- <section class="section">
+             <div
           class="form-message"
           id="formMessage"
           hidden
@@ -87,14 +89,6 @@
               required
             ></textarea>
           </div>
-          <div class="field">
-
-            <!-- Cloudflare Turnstile YOUR_TURNSTILE_SITE_KEY -->
-            <div
-              class="cf-turnstile"
-              data-sitekey="YOUR_TURNSTILE_SITE_KEY"
-            ></div>
-          </div>
           <button
             type="submit"
             class="button"
@@ -107,7 +101,7 @@
               class="fa-solid fa-envelope"
               aria-hidden="true"
             ></i> contact@rhizomatica.org</a>.</p>
-      </section>
+      </section> -->
     </div>
   </main>
 
@@ -117,11 +111,6 @@
   ></footer>
 
   <script src="js/main.js"></script>
-  <script
-    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-    async
-    defer
-  ></script>
   <script>
     // Show a success/error message after contact.php processes the form
     (function () {

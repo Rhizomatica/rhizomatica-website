@@ -20,8 +20,8 @@ rhizomatica/
 ├── videos-hf.html      # HF Radio: embedded video tutorials
 ├── blog.html           # Blog: post listing (links to the individual posts below)
 ├── blog/               # Individual blog post pages (10 posts, one file per post)
-├── contact.html        # Contact: form (Cloudflare Turnstile) + email address
-├── contact.php         # Contact form handler (validates Turnstile, sends email)
+├── contact.html        # Contact: form + email address
+├── contact.php         # Contact form handler (sends email)
 ├── navbar.html         # Shared navigation partial (sidebar + mobile nav)
 ├── footer.html         # Shared footer partial
 ├── docs/               # Downloadable PDFs (guides and manuals)
@@ -57,8 +57,8 @@ rhizomatica/
 - **vendor/** — self-hosted copies of the site's third-party assets (Google Fonts
   `Crimson Text` / `Source Sans 3` and Font Awesome 6.7.2). They are pulled in by
   `css/styles.css` via `@import` (so each page still links only the one
-  `styles.css` file) instead of fetching from `fonts.googleapis.com` /
-  `cdnjs.cloudflare.com`, keeping the site fully offline.
+  `styles.css` file) instead of fetching from a CDN, keeping the site fully
+  offline.
 
 ## Running locally
 
@@ -124,27 +124,15 @@ Everything else is required by the live site, including:
 
 ## Contact form
 
-The contact page (`contact.html`) uses **Cloudflare Turnstile** and posts to
-`contact.php`, which verifies the Turnstile token server-side and emails the
-message.
+The contact page (`contact.html`) posts to `contact.php`, which validates the
+submitted fields and emails the message.
 
-To activate it:
-
-1. Create a **Turnstile** widget in the
-   [Cloudflare dashboard](https://dash.cloudflare.com/) and copy the **site
-   key** and **secret key**. Add your domain(s) (for example `rhizomatica.org`
-   and `www.rhizomatica.org`) to the widget's hostname list.
-2. Put the **site key** in `contact.html` (replace `YOUR_TURNSTILE_SITE_KEY`).
-3. Put the **secret key** in `contact.php` (replace
-   `YOUR_TURNSTILE_SECRET_KEY`), and set `$recipient` and `$from` to your real
-   addresses.
+To activate it, set `$recipient` and `$from` in `contact.php` to your real
+addresses.
 
 > **Important:** `contact.php` needs a PHP-enabled web server. Because the site
 > is published to a PHP host over FTP, the contact form lives on the same
 > server as the rest of the site — no separate setup is needed.
->
-> Keep the **secret key** server-side only: never put it in an `.html` file or
-> anywhere it could be downloaded publicly.
 
 ## Customizing
 
