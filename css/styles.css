@@ -1,3 +1,8 @@
+/* Self-hosted third-party assets (no CDN). @import must precede all other rules. */
+@import url("../vendor/google-fonts.css");
+@import url("../vendor/fontawesome/css/all.min.css");
+
+
 /* ==========================================================================
    rhizomatica — style replica
    Based on the "glitch" WordPress theme (Foundation grid).

@@ -29,6 +29,10 @@ rhizomatica/
 │   └── styles.css      # All styles (colors, fonts, layout, responsive rules)
 ├── js/
 │   └── main.js         # Mobile menu, accordion, active nav, partial injection
+├── vendor/             # Self-hosted third-party assets (no CDN dependency)
+│   ├── google-fonts.css  # Crimson Text + Source Sans 3 @font-face rules
+│   ├── fonts/            # Local woff2 files for the Google fonts
+│   └── fontawesome/      # Font Awesome 6.7.2 CSS + webfonts
 └── README.md
 ```
 
@@ -50,6 +54,11 @@ rhizomatica/
   sidebar, the full-viewport hero, and the mobile layout breakpoints.
 - **js/main.js** — injects `navbar.html`/`footer.html`, opens/closes the mobile
   menu, highlights the active nav item, and powers the resources accordion.
+- **vendor/** — self-hosted copies of the site's third-party assets (Google Fonts
+  `Crimson Text` / `Source Sans 3` and Font Awesome 6.7.2). They are pulled in by
+  `css/styles.css` via `@import` (so each page still links only the one
+  `styles.css` file) instead of fetching from `fonts.googleapis.com` /
+  `cdnjs.cloudflare.com`, keeping the site fully offline.
 
 ## Running locally
 
@@ -95,6 +104,7 @@ Everything else is required by the live site, including:
 
 - `home_img.png` — referenced by `css/styles.css` as the hero background
 - `docs/` — the downloadable PDF guides linked from `resources.html`
+- `vendor/` — the self-hosted fonts and Font Awesome assets loaded by every page
 - `navbar.html` / `footer.html` — fetched by the pages via JavaScript, so they
   must sit in the same directory as the HTML pages
 - `contact.php` — the contact form handler (the host must run PHP)
