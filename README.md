@@ -12,7 +12,7 @@ published by uploading the files to a PHP-enabled web server over FTP.
 ```
 rhizomatica/
 ├── index.html          # Homepage: full-viewport hero + call to action
-├── home_img.png        # Homepage hero background image
+├── home_img.jpg        # Homepage hero background image
 ├── about.html          # About: history, mission, approach
 ├── who-we-are.html     # Who We Are: team, HERMES team, board, supporters
 ├── what-we-do.html     # What We Do: four strategies + projects
@@ -102,7 +102,7 @@ only files to skip are development-only and should never live on the server:
 
 Everything else is required by the live site, including:
 
-- `home_img.png` — referenced by `css/styles.css` as the hero background
+- `home_img.jpg` — referenced by `css/styles.css` as the hero background
 - `docs/` — the downloadable PDF guides linked from `resources.html`
 - `vendor/` — the self-hosted fonts and Font Awesome assets loaded by every page
 - `navbar.html` / `footer.html` — fetched by the pages via JavaScript, so they
@@ -148,7 +148,7 @@ To activate it:
 
 ## Customizing
 
-- **Hero image** — the homepage background uses `home_img.png` (with a dark
+- **Hero image** — the homepage background uses `home_img.jpg` (with a dark
   overlay applied in `css/styles.css`). To swap it, replace that file or update
   the `url()` in the `.hero-bg` rule.
 - **Colors / fonts** — all values are CSS custom properties at the top of
