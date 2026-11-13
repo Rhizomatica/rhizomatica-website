@@ -53,6 +53,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* The home page is a single full-viewport hero; never scroll it. */
+body.home {
+  height: 100vh;
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
 }
